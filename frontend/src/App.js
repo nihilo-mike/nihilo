@@ -1,8 +1,11 @@
 import './App.css';
+import Appnav from './Appnav';
 
 function App() {
   return (
-    <h2>whats good</h2>
+    <div>
+   
+    </div>
    
   );
 }

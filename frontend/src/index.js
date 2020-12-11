@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
+import Example from './Navbar';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+   <div style={{border:"3px solid rgba(217, 255, 0, 0.863)"}}>
+     <Example />
+</div>
+
+<div style={{display: "flex",  justifyContent:'center', alignItems:'center',paddingTop:"200px"}}>
+    <text style={{fontSize:"100px",color:"whitesmoke"}}>welcome</text> 
+</div>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
