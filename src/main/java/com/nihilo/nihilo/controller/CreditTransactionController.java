@@ -41,7 +41,7 @@ public class CreditTransactionController {
         return ResponseEntity.ok().body(results);
     }
 
-    @DeleteMapping("/category/{creditTransId}")
+    @DeleteMapping("/CreditTransaction/{creditTransId}")
     ResponseEntity<?>deleteCreditTransaction(@PathVariable Long creditTransId){
         creditTransactionRepository.deleteById(creditTransId);
         return ResponseEntity.ok().build();
