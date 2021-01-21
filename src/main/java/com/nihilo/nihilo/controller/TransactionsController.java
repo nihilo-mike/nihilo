@@ -29,7 +29,7 @@ public class TransactionsController {
     }
     @GetMapping("/Transaction/{transId}")
       ResponseEntity<?>getTransaction(@PathVariable Long transId){
-      Optional<Transactions>transaction=transactionRepository.findById(transId);
+      Optional<Transactions>transaction=transactionRepository.findById(id);
         return transaction.map(response->ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
        }
