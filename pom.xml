@@ -15,7 +15,7 @@
 	<description>an app that helps with some simple accounting </description>
 
 	<properties>
-		<java.version>15</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>

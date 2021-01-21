@@ -21,6 +21,7 @@ public class CreditTransactionController {
 @GetMapping("/CreditTransaction")
       List<CreditTransaction> creditTransactions(){
         return creditTransactionRepository.findAll();
+        
 }
 
 @GetMapping("/CreditTransaction/{creditTransId}")
@@ -34,6 +35,14 @@ public class CreditTransactionController {
         CreditTransaction result=creditTransactionRepository.save(creditTransaction);
         return ResponseEntity.created(new URI("/api/CreditTransaction"+result.getCreditTransId())).body(result);
     }
+
+    @PostMapping("/CreditTransactions")
+    ResponseEntity<List<CreditTransaction>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions)throws URISyntaxException {
+        List<CreditTransaction> result=creditTransactionRepository.saveAll(creditTransactions);
+        return ResponseEntity.created(new URI("/api/CreditTransaction"+ ((CreditTransaction) result)
+                .getCreditTransId())).body(result);
+    }    
+
 
     @PutMapping("/CreditTransaction/{creditTransId}")
     ResponseEntity<CreditTransaction>updateCreditTransaction(@RequestBody CreditTransaction creditTransaction){
