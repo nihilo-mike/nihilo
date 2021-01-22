@@ -37,10 +37,9 @@ public class CreditTransactionController {
     }
 
     @PostMapping("/CreditTransactions")
-    ResponseEntity<List<CreditTransaction>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions)throws URISyntaxException {
+    ResponseEntity<List<CreditTransaction>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions){
         List<CreditTransaction> result=creditTransactionRepository.saveAll(creditTransactions);
-        return ResponseEntity.created(new URI("/api/CreditTransaction"+ ((CreditTransaction) result)
-                .getCreditTransId())).body(result);
+        return ResponseEntity.ok().body(results);
     }    
 
 
