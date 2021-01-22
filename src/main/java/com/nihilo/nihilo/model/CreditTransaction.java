@@ -15,7 +15,7 @@ import java.time.Instant;
 public class CreditTransaction {
     @Id
     @GeneratedValue
-    private Long creditTransId;
+    private Long creditTransId;   
 private long amount;
 private String remark;
 private Instant date;
