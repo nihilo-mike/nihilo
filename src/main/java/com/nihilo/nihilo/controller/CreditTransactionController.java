@@ -39,7 +39,7 @@ public class CreditTransactionController {
     @PostMapping("/CreditTransactions")
     ResponseEntity<List<CreditTransaction>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions){
         List<CreditTransaction> result=creditTransactionRepository.saveAll(creditTransactions);
-        return ResponseEntity.ok().body(results);
+        return ResponseEntity.ok().body(result);
     }    
 
 
