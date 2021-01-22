@@ -45,10 +45,9 @@ public class DebitTransactionController {
     }
 
     @PostMapping("/DebitTransactions")
-    ResponseEntity<List<DebitTransaction>>createDebitTransactions(@RequestBody List<DebitTransaction> debitTransactions)throws URISyntaxException {
+    ResponseEntity<List<DebitTransaction>>createDebitTransactions(@RequestBody List<DebitTransaction> debitTransactions){
         List<DebitTransaction> result=debitTransactionRepository.saveAll(debitTransactions);
-        return ResponseEntity.created(new URI("/api/DebitTransaction"+ ((DebitTransaction) result)
-                .getDebitTransId())).body(result);
+        return ResponseEntity.ok().body(result);
     }  
 
 
