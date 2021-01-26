@@ -23,8 +23,7 @@ private Instant date;
 private AccountType accountType;
 @ManyToOne
 private SubAccountType subAccountType;
-@ManyToOne
-private Transactions transactions;
+
 
 
 }
