@@ -38,7 +38,7 @@ public class CreditTransactionController {
     }
 
     @PostMapping("/CreditTransactions")
-    ResponseEntity<List<Long>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions){
+    ResponseEntity<?>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions){
         List<CreditTransaction> result=creditTransactionRepository.saveAll(creditTransactions);
         List<Long>resp=new ArrayList<>();
         while(result.iterator().hasNext()){
