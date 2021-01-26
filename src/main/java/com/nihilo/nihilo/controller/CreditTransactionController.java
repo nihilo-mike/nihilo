@@ -44,7 +44,7 @@ public class CreditTransactionController {
         while(result.iterator().hasNext()){
        long tmp= result.iterator().next().getCreditTransId();
             resp.add(tmp);}
-        return ResponseEntity.ok().body(resp);
+        return ResponseEntity.ok().body(resp.toString());
     }    
 
 
