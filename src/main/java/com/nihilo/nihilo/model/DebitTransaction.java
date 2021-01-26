@@ -23,5 +23,7 @@ public class DebitTransaction {
     private AccountType accountType;
     @ManyToOne
     private SubAccountType subAccountType;
+    @ManyToOne
+    private Transactions transactions;
 
 }
