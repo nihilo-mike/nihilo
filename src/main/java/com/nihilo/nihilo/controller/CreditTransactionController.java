@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +38,13 @@ public class CreditTransactionController {
     }
 
     @PostMapping("/CreditTransactions")
-    ResponseEntity<List<CreditTransaction>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions){
+    ResponseEntity<List<Long>>createCreditTransactions(@RequestBody List<CreditTransaction> creditTransactions){
         List<CreditTransaction> result=creditTransactionRepository.saveAll(creditTransactions);
-        return ResponseEntity.ok().body(result);
+        List<Long>resp=new ArrayList<>();
+        while(result.iterator().hasNext()){
+       long tmp= result.iterator().next().getCreditTransId();
+            resp.add(tmp);}
+        return ResponseEntity.ok().body(resp);
     }    
 
 
