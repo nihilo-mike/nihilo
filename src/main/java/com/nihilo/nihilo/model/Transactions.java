@@ -17,9 +17,7 @@ public class Transactions {
     @Id
     @GeneratedValue    
 private Long transId;
-@OneToMany
 private List<CreditTransaction> creditTransactions;
-@OneToMany
 private List<DebitTransaction> debitTransactions;
 
     
