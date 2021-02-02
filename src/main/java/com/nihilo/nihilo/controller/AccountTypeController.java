@@ -11,7 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Optional;
-
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class AccountTypeController {
