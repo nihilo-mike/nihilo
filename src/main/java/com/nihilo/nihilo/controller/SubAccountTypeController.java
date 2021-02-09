@@ -48,7 +48,7 @@ public class SubAccountTypeController {
     }
 
     @DeleteMapping("/SubAccountType/{subId}")
-    ResponseEntity<?>deleteAccountType(@PathVariable Long subId){
+    ResponseEntity<?>deleteSubAccountType(@PathVariable Long subId){
         subAccountTypeRepository.deleteById(subId);
         return ResponseEntity.ok().build();
     }
