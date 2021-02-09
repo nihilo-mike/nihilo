@@ -12,4 +12,5 @@ public interface CreditTransactionRepository extends JpaRepository<CreditTransac
     List<CreditTransaction>findAllByDate(Instant date);
     List<CreditTransaction>findAll();
     List<CreditTransaction>findBySubAccountType(Long subId);
+    List<CreditTransaction>findByAccountType(Long accTypeId);
 }
