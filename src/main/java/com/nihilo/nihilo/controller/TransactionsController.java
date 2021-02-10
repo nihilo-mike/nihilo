@@ -41,7 +41,7 @@ public class TransactionsController {
            return ResponseEntity.created(new URI("/api/Transaction"+result.getTransId())).body(result);
        }
     
-       @DeleteMapping("/Transaction/{TransId}")
+       @DeleteMapping("/Transaction/{transId}")
        ResponseEntity<?>deleteTransaction(@PathVariable Long transId){
            transactionRepository.deleteById(transId);
            return ResponseEntity.ok().build();
