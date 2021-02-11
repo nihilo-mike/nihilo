@@ -15,5 +15,6 @@ public class SubAccountType {
     @Id
     private Long subId;
     private String name;
+    private int parent;
 
 }
