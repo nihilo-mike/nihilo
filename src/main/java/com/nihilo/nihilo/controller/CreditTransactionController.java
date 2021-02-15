@@ -20,7 +20,6 @@ import java.util.Optional;
 public class CreditTransactionController {
     @Autowired
     private CreditTransactionRepository creditTransactionRepository;
-    @Autowired
     private BalanceSheetService balanceSheet;
 
 @GetMapping("/CreditTransaction")
@@ -31,6 +30,7 @@ public class CreditTransactionController {
 @GetMapping("/BalanceSheet")
       Map<String,Long>getBalanceSheet(){
         return balanceSheet.asset();
+        
         
 }
 
