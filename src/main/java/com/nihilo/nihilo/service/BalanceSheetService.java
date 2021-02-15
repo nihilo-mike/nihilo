@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 
 import com.nihilo.nihilo.model.CreditTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
@@ -19,24 +18,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BalanceSheetService {
 
-    
 @Autowired
 CreditTransactionRepository cRepository;
 
 @Autowired
 DebitTransactionRepository dRepository;
 
-List<CreditTransaction>cashList=cRepository.findBySubAccountType(1L);
-List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType(2L);
-List<CreditTransaction>accountReceivablesList=cRepository.findBySubAccountType(3L);
-List<CreditTransaction>stockInventoryList=cRepository.findBySubAccountType(4L);
-List<CreditTransaction>prepaidLiabilitiesList=cRepository.findBySubAccountType(5L);
-List<CreditTransaction>intellectualPropertiesList=cRepository.findBySubAccountType(6L);
-List<CreditTransaction>plantEquipmentList=cRepository.findBySubAccountType(7L);
- 
 
-@PostConstruct
-public Map<String,Long> asset() {
+ public Map<String,Long> asset() {
+  List<CreditTransaction>cashList=cRepository.findBySubAccountType(1L);
+  List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType(2L);
+  List<CreditTransaction>accountReceivablesList=cRepository.findBySubAccountType(3L);
+  List<CreditTransaction>stockInventoryList=cRepository.findBySubAccountType(4L);
+  List<CreditTransaction>prepaidLiabilitiesList=cRepository.findBySubAccountType(5L);
+  List<CreditTransaction>intellectualPropertiesList=cRepository.findBySubAccountType(6L);
+  List<CreditTransaction>plantEquipmentList=cRepository.findBySubAccountType(7L);
 HashMap<String,Long>assetMap=new HashMap<>();
     assetMap.put("cash", sumCalculator(cashList));
     assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
@@ -48,7 +44,7 @@ HashMap<String,Long>assetMap=new HashMap<>();
   return assetMap;
 }
 
-@PostConstruct
+
 private Long sumCalculator(List<CreditTransaction>cList){
     Long amount=0L; 
     for (CreditTransaction creditTransaction : cList) {
