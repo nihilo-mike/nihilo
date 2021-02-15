@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import com.nihilo.nihilo.model.CreditTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
 import com.nihilo.nihilo.repository.DebitTransactionRepository;
@@ -33,7 +35,7 @@ List<CreditTransaction>intellectualPropertiesList=cRepository.findBySubAccountTy
 List<CreditTransaction>plantEquipmentList=cRepository.findBySubAccountType(7L);
  
 
-
+@PostConstruct
 public Map<String,Long> asset() {
 HashMap<String,Long>assetMap=new HashMap<>();
     assetMap.put("cash", sumCalculator(cashList));
@@ -46,7 +48,7 @@ HashMap<String,Long>assetMap=new HashMap<>();
   return assetMap;
 }
 
-
+@PostConstruct
 private Long sumCalculator(List<CreditTransaction>cList){
     Long amount=0L; 
     for (CreditTransaction creditTransaction : cList) {
