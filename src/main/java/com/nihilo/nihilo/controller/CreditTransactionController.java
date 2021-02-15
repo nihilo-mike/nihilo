@@ -2,6 +2,8 @@ package com.nihilo.nihilo.controller;
 
 import com.nihilo.nihilo.model.CreditTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
+import com.nihilo.nihilo.service.BalanceSheetService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -17,10 +20,17 @@ import java.util.Optional;
 public class CreditTransactionController {
     @Autowired
     private CreditTransactionRepository creditTransactionRepository;
+    @Autowired
+    private BalanceSheetService balanceSheet;
 
 @GetMapping("/CreditTransaction")
       List<CreditTransaction> creditTransactions(){
         return creditTransactionRepository.findAll();
+        
+}
+@GetMapping("/BalanceSheet")
+      HashMap<String,Long>getBalanceSheet(){
+        return balanceSheet.asset();
         
 }
 
