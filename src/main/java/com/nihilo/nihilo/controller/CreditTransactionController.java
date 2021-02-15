@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 @CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
@@ -29,7 +29,7 @@ public class CreditTransactionController {
         
 }
 @GetMapping("/BalanceSheet")
-      HashMap<String,Long>getBalanceSheet(){
+      Map<String,Long>getBalanceSheet(){
         return balanceSheet.asset();
         
 }
