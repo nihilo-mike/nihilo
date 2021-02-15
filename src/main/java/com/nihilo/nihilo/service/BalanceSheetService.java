@@ -14,6 +14,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class BalanceSheetService {
 
+    public BalanceSheetService() {
+        //default for autowiring
+	}
+
+
+
+
 @Autowired
 CreditTransactionRepository cRepository;
 
