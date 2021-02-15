@@ -11,17 +11,13 @@ import com.nihilo.nihilo.repository.DebitTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.NoArgsConstructor;
 
 @Component
+@NoArgsConstructor
 public class BalanceSheetService {
 
-    public BalanceSheetService() {
-        //default for autowiring
-	}
-
-
-
-
+    
 @Autowired
 CreditTransactionRepository cRepository;
 
@@ -35,7 +31,7 @@ List<CreditTransaction>stockInventoryList=cRepository.findBySubAccountType(4L);
 List<CreditTransaction>prepaidLiabilitiesList=cRepository.findBySubAccountType(5L);
 List<CreditTransaction>intellectualPropertiesList=cRepository.findBySubAccountType(6L);
 List<CreditTransaction>plantEquipmentList=cRepository.findBySubAccountType(7L);
-
+ 
 
 
 public Map<String,Long> asset() {
