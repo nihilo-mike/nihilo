@@ -31,8 +31,8 @@ DebitTransactionRepository dRepository;
  SubAccountType a=new SubAccountType();
  a.setSubId(1L);
 
-  List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(a);
- // List<CreditTransaction>cashEquivalentsList=cRepository.findAllBySubAccountType(2L);
+List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(a);
+List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType_SubId(1L);
  //List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType(3L);
  // List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType(4L);
  // List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType(5L);
@@ -40,7 +40,7 @@ DebitTransactionRepository dRepository;
   //List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType(7L);
 HashMap<String,Long>assetMap=new HashMap<>();
     assetMap.put("cash", sumCalculator(cashList));
-   // assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
+    assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
    // assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
    // assetMap.put("stockInventory",sumCalculator(stockInventoryList));
    // assetMap.put("prepaidLiabilites",sumCalculator(prepaidLiabilitiesList));
@@ -49,6 +49,11 @@ HashMap<String,Long>assetMap=new HashMap<>();
   return assetMap;
 }
 
+
+
+//dr-cr
+//date important 
+//
 
 private Long sumCalculator(List<CreditTransaction>cList){
     Long amount=0L; 
