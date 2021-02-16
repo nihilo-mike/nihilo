@@ -28,10 +28,10 @@ DebitTransactionRepository dRepository;
 
  public Map<String,Long> asset() {
  
- SubAccountType a=new SubAccountType();
- a.setId(1L);
+ //SubAccountType a=new SubAccountType();
+ //a.setId(1L);
 
-  List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(a);
+  //List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(a);
  // List<CreditTransaction>cashEquivalentsList=cRepository.findAllBySubAccountType(2L);
  //List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType(3L);
  // List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType(4L);
@@ -39,7 +39,7 @@ DebitTransactionRepository dRepository;
  // List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType(6L);
   //List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType(7L);
 HashMap<String,Long>assetMap=new HashMap<>();
-    assetMap.put("cash", sumCalculator(cashList));
+   // assetMap.put("cash", sumCalculator(cashList));
    // assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
    // assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
    // assetMap.put("stockInventory",sumCalculator(stockInventoryList));
