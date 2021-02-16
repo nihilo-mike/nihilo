@@ -17,9 +17,9 @@ public class Transactions {
     @Id
     @GeneratedValue    
 private Long transId;
-@OneToMany(cascade=CascadeType.REMOVE,orphanRemoval = true)
+@OneToMany
 private List<CreditTransaction> creditTransactions;
-@OneToMany(cascade=CascadeType.REMOVE,orphanRemoval = true)
+@OneToMany
 private List<DebitTransaction> debitTransactions;
 
     
