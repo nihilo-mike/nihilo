@@ -44,7 +44,7 @@ public class SubAccountTypeController {
     ResponseEntity<SubAccountType>createSubAccountType(@RequestBody SubAccountType subAccountType)
             throws URISyntaxException {
         SubAccountType result=subAccountTypeRepository.save(subAccountType);
-        return ResponseEntity.created(new URI("/api/SubAccountType"+result.getId())).body(result);
+        return ResponseEntity.created(new URI("/api/SubAccountType"+result.getSubId())).body(result);
     }
 
     @DeleteMapping("/SubAccountType/{subId}")
