@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "SubAccountType")
 public class SubAccountType {
     @Id
-    private Long subId;
+    private Long id;
     private String name;
     private int parent;
 
