@@ -6,6 +6,7 @@ import java.util.Map;
 
 
 import com.nihilo.nihilo.model.CreditTransaction;
+import com.nihilo.nihilo.model.SubAccountType;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
 import com.nihilo.nihilo.repository.DebitTransactionRepository;
 
@@ -26,21 +27,25 @@ DebitTransactionRepository dRepository;
 
 
  public Map<String,Long> asset() {
-  List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(1L);
-  List<CreditTransaction>cashEquivalentsList=cRepository.findAllBySubAccountType(2L);
-  List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType(3L);
-  List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType(4L);
-  List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType(5L);
-  List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType(6L);
-  List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType(7L);
+ 
+ SubAccountType a=new SubAccountType();
+ a.setId(1L);
+
+  List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(a);
+ // List<CreditTransaction>cashEquivalentsList=cRepository.findAllBySubAccountType(2L);
+ //List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType(3L);
+ // List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType(4L);
+ // List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType(5L);
+ // List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType(6L);
+  //List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType(7L);
 HashMap<String,Long>assetMap=new HashMap<>();
     assetMap.put("cash", sumCalculator(cashList));
-    assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
-    assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
-    assetMap.put("stockInventory",sumCalculator(stockInventoryList));
-    assetMap.put("prepaidLiabilites",sumCalculator(prepaidLiabilitiesList));
-    assetMap.put("intellectualProperties",sumCalculator(intellectualPropertiesList));
-    assetMap.put("plantEquipment",sumCalculator(plantEquipmentList)); 
+   // assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
+   // assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
+   // assetMap.put("stockInventory",sumCalculator(stockInventoryList));
+   // assetMap.put("prepaidLiabilites",sumCalculator(prepaidLiabilitiesList));
+   // assetMap.put("intellectualProperties",sumCalculator(intellectualPropertiesList));
+   // assetMap.put("plantEquipment",sumCalculator(plantEquipmentList)); 
   return assetMap;
 }
 
