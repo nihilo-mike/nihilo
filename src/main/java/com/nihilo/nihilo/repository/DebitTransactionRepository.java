@@ -10,5 +10,5 @@ public interface DebitTransactionRepository extends JpaRepository<DebitTransacti
     List<DebitTransaction>findDebitTransactionByAccountTypeAndSubAccountType(Long id,Long subId );
     List<DebitTransaction>findAllByDate(Instant date);
     List<DebitTransaction>findAll();
-    List<DebitTransaction>findBySubAccountType(Long subId);
+    List<DebitTransaction>findBySubAccountType_SubId(Long subId);
 }

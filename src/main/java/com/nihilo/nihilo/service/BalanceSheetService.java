@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.nihilo.nihilo.model.CreditTransaction;
-import com.nihilo.nihilo.model.SubAccountType;
+
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
 import com.nihilo.nihilo.repository.DebitTransactionRepository;
 
@@ -28,19 +27,16 @@ DebitTransactionRepository dRepository;
 
  public Map<String,Long> asset() {
  
- SubAccountType a=new SubAccountType();
- a.setSubId(1L);
-
-List<CreditTransaction>cashList=cRepository.findAllBySubAccountType(a);
-List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType_SubId(1L);
- //List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType(3L);
- // List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType(4L);
- // List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType(5L);
- // List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType(6L);
-  //List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType(7L);
-HashMap<String,Long>assetMap=new HashMap<>();
+    List<CreditTransaction>cashList=cRepository.findBySubAccountType_SubId(1L);
+   // List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType_SubId(2L);
+   // List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType_SubId(3L);
+   // List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType_SubId(4L);
+   // List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType_SubId(5L);
+   // List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType_SubId(6L);
+   // List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType_SubId(7L);
+  HashMap<String,Long>assetMap=new HashMap<>();
     assetMap.put("cash", sumCalculator(cashList));
-    assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
+  //  assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
    // assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
    // assetMap.put("stockInventory",sumCalculator(stockInventoryList));
    // assetMap.put("prepaidLiabilites",sumCalculator(prepaidLiabilitiesList));

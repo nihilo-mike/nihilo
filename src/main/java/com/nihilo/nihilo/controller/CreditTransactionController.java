@@ -3,6 +3,7 @@ package com.nihilo.nihilo.controller;
 import com.nihilo.nihilo.model.CreditTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
 import com.nihilo.nihilo.service.BalanceSheetService;
+import com.nihilo.nihilo.service.IncomeStatement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +25,9 @@ public class CreditTransactionController {
    @Autowired
     private BalanceSheetService balanceSheet;
 
+  @Autowired
+   private IncomeStatement incomeStatement;
+
 @GetMapping("/CreditTransaction")
       List<CreditTransaction> creditTransactions(){
         return creditTransactionRepository.findAll();
@@ -31,15 +36,18 @@ public class CreditTransactionController {
 @GetMapping("/BalanceSheet")
       Map<String,Long>getBalanceSheet(){
         return balanceSheet.asset();
-        
-        
-}
+        }
 
 @GetMapping("/CreditTransaction/{creditTransId}")
     ResponseEntity<?>getCreditTransaction(@PathVariable Long creditTransId){
     Optional<CreditTransaction>creditTransaction=creditTransactionRepository.findById(creditTransId);
     return creditTransaction.map(response->ResponseEntity.ok().body(response))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+
+@GetMapping("/IncomeStatement/{startDate}/{endDate}")
+    Map<String,Long>getIncomeStatement(@PathVariable Instant startDate,@PathVariable Instant endDate){
+    return incomeStatement.incomeStatement(startDate, endDate);
 }
 @PostMapping("/CreditTransaction")
     ResponseEntity<CreditTransaction>createCreditTransaction(@RequestBody CreditTransaction creditTransaction)throws URISyntaxException {
