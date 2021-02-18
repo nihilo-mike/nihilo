@@ -43,14 +43,15 @@ public class CreditTransactionController {
     Optional<CreditTransaction>creditTransaction=creditTransactionRepository.findById(creditTransId);
     return creditTransaction.map(response->ResponseEntity.ok().body(response))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
+    }
 
 @GetMapping("/IncomeStatement/{startDate}/{endDate}")
     Map<String,Long>getIncomeStatement(@PathVariable Instant startDate,@PathVariable Instant endDate){
     return incomeStatement.incomeStatement(startDate, endDate);
 }
 @PostMapping("/CreditTransaction")
-    ResponseEntity<CreditTransaction>createCreditTransaction(@RequestBody CreditTransaction creditTransaction)throws URISyntaxException {
+    ResponseEntity<CreditTransaction>createCreditTransaction(@RequestBody CreditTransaction creditTransaction)
+    throws URISyntaxException {
         CreditTransaction result=creditTransactionRepository.save(creditTransaction);
         return ResponseEntity.created(new URI("/api/CreditTransaction"+result.getCreditTransId())).body(result);
     }
