@@ -50,7 +50,7 @@ public Map<String,Double>incomeStatement(Instant startDate,Instant endDate){
         incomeMap.put("Ebit",ebit);
         incomeMap.put("InterestExpense",interestExpense);
         incomeMap.put("PretaxIncome",ebit-interestExpense);
-        incomeMap.put("Taxes",taxes);
+        incomeMap.put("Taxes",checkTax(taxes));
         incomeMap.put("netIncome",netIncome);
         incomeMap.put("Addition to earnings",0.0);
         incomeMap.put("Divivends",0.0);
@@ -74,6 +74,12 @@ private double drCalculator(List<DebitTransaction>dList){
        amount+=tmp;
         }
         return amount;
+}
+private double checkTax(double tax){
+    if(tax<0.0){
+        return 0.0;
+    }
+    return tax;
 }
 
 
