@@ -26,30 +26,55 @@ CreditTransactionRepository cRepository;
 DebitTransactionRepository dRepository;
 
 
-    
-public Map<String,Long>incomeStatement(Instant startDate,Instant endDate){
-
-List<CreditTransaction>revenue=cRepository.findbyAccountTypeandDate(2L, startDate, endDate);
-
-Map<String,Long>revenueMap=new HashMap<>();
-revenueMap.put("revenue", sumCalculator(revenue));
-
-return revenueMap;
-
+public Map<String,Double>incomeStatement(Instant startDate,Instant endDate){
+    double revenueCt=sumCalculator(cRepository.findbyAccountTypeandDate(2L, startDate, endDate));
+    double revenueDt=drCalculator(dRepository.findbyAccountTypeandDate(2L, startDate, endDate));
+    double totalRevenue=revenueCt-revenueDt;
+    double cogsDr=drCalculator(dRepository.findbySubAccountandDate(30L, startDate, endDate));
+    double cogsCr=sumCalculator(cRepository.findbySubAccountandDate(24L, startDate, endDate));
+    double cogs=cogsDr-cogsCr;
+    double sgac=drCalculator(dRepository.findSgs(5L, startDate, endDate));
+    double depriciation=sumCalculator(cRepository.findbySubAccountandDate(30L, startDate, endDate));
+    double ebit=totalRevenue-cogs-sgac-depriciation;
+    double interestDr=drCalculator(dRepository.findbySubAccountandDate(31L, startDate, endDate));
+    double interestCr=sumCalculator(cRepository.findbySubAccountandDate(31L, startDate, endDate));
+    double interestExpense=interestDr-interestCr;
+    double preTax=ebit-interestExpense;
+    double taxes=0.2*preTax;
+    double netIncome=preTax-taxes;
+    Map<String,Double>incomeMap=new HashMap<>();
+        incomeMap.put("revenue",totalRevenue);
+        incomeMap.put("COGS",cogs);
+        incomeMap.put("SGAC",sgac);
+        incomeMap.put("Depreciation",depriciation);
+        incomeMap.put("Ebit",ebit);
+        incomeMap.put("InterestExpense",interestExpense);
+        incomeMap.put("PretaxIncome",ebit-interestExpense);
+        incomeMap.put("Taxes",taxes);
+        incomeMap.put("netIncome",netIncome);
+        incomeMap.put("Addition to earnings",0.0);
+        incomeMap.put("Divivends",0.0);
+  return incomeMap;
 }
 
 
-private Long sumCalculator(List<CreditTransaction>cList){
-    Long amount=0L; 
+
+private double sumCalculator(List<CreditTransaction>cList){
+    double amount=0.0; 
     for (CreditTransaction creditTransaction : cList) {
-       Long tmp=creditTransaction.getAmount();
+       double tmp=creditTransaction.getAmount();
        amount+=tmp;
         }
         return amount;
 }
-
-
-
+private double drCalculator(List<DebitTransaction>dList){
+    double amount=0.0; 
+    for (DebitTransaction debitTransaction : dList) {
+       double tmp=debitTransaction.getAmount();
+       amount+=tmp;
+        }
+        return amount;
+}
 
 
 

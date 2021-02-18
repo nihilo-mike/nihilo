@@ -18,6 +18,11 @@ public interface CreditTransactionRepository extends JpaRepository<CreditTransac
   @Query(value="SELECT c FROM CreditTransaction c WHERE c.accountType.accTypeId=:accTypeId AND c.date BETWEEN :startDate AND :endDate")
   List<CreditTransaction>findbyAccountTypeandDate(@Param("accTypeId")Long accTypeId,@Param("startDate")Instant
    startDate,@Param("endDate")Instant endDate);
+
+   @Query(value="SELECT c FROM CreditTransaction c WHERE c.subAccountType.subId=:subId AND c.date BETWEEN :startDate AND :endDate")
+   List<CreditTransaction>findbySubAccountandDate(@Param("subId")Long subId,@Param("startDate")Instant
+    startDate,@Param("endDate")Instant endDate);
+   
   
   List<CreditTransaction>findBySubAccountType_SubId(Long subId);
     

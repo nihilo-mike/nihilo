@@ -34,7 +34,7 @@ public class CreditTransactionController {
         
 }
 @GetMapping("/BalanceSheet")
-      Map<String,Long>getBalanceSheet(){
+      Map<String,Double>getBalanceSheet(){
         return balanceSheet.asset();
         }
 
@@ -46,7 +46,7 @@ public class CreditTransactionController {
     }
 
 @GetMapping("/IncomeStatement/{startDate}/{endDate}")
-    Map<String,Long>getIncomeStatement(@PathVariable Instant startDate,@PathVariable Instant endDate){
+    Map<String,Double>getIncomeStatement(@PathVariable Instant startDate,@PathVariable Instant endDate){
     return incomeStatement.incomeStatement(startDate, endDate);
 }
 @PostMapping("/CreditTransaction")

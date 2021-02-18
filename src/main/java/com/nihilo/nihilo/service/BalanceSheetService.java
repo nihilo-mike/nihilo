@@ -25,7 +25,7 @@ CreditTransactionRepository cRepository;
 DebitTransactionRepository dRepository;
 
 
- public Map<String,Long> asset() {
+ public Map<String,Double> asset() {
  
     List<CreditTransaction>cashList=cRepository.findBySubAccountType_SubId(1L);
    // List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType_SubId(2L);
@@ -34,7 +34,7 @@ DebitTransactionRepository dRepository;
    // List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType_SubId(5L);
    // List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType_SubId(6L);
    // List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType_SubId(7L);
-  HashMap<String,Long>assetMap=new HashMap<>();
+  HashMap<String,Double>assetMap=new HashMap<>();
     assetMap.put("cash", sumCalculator(cashList));
   //  assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
    // assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
@@ -51,10 +51,10 @@ DebitTransactionRepository dRepository;
 //date important 
 //
 
-private Long sumCalculator(List<CreditTransaction>cList){
-    Long amount=0L; 
+private double sumCalculator(List<CreditTransaction>cList){
+    double amount=0.0; 
     for (CreditTransaction creditTransaction : cList) {
-       Long tmp=creditTransaction.getAmount();
+       double tmp=creditTransaction.getAmount();
        amount+=tmp;
         }
         return amount;

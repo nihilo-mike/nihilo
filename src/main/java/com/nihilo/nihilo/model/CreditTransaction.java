@@ -16,7 +16,7 @@ public class CreditTransaction {
     @Id
     @GeneratedValue
     private Long creditTransId;   
-private long amount;
+private double amount;
 private String remark;
 private Instant date;
 @ManyToOne

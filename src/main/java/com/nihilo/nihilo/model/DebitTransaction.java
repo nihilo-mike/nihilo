@@ -16,7 +16,7 @@ public class DebitTransaction {
     @Id
     @GeneratedValue
     private Long debitTransId;
-    private long amount;
+    private double amount;
     private String remark;
     private Instant date;
     @ManyToOne
