@@ -27,21 +27,21 @@ DebitTransactionRepository dRepository;
 
 
 public Map<String,Double>incomeStatement(Instant startDate,Instant endDate){
-    double revenueCt=sumCalculator(cRepository.findbyAccountTypeandDate(2L, startDate, endDate));
-    double revenueDt=drCalculator(dRepository.findbyAccountTypeandDate(2L, startDate, endDate));
+    double revenueCt=creditCalculator(cRepository.findbyAccountTypeandDate(2L, startDate, endDate));
+    double revenueDt=debitCalculator(dRepository.findbyAccountTypeandDate(2L, startDate, endDate));
     double totalRevenue=revenueCt-revenueDt;
-    double cogsDr=drCalculator(dRepository.findbySubAccountandDate(30L, startDate, endDate));
-    double cogsCr=sumCalculator(cRepository.findbySubAccountandDate(24L, startDate, endDate));
+    double cogsDr=debitCalculator(dRepository.findbySubAccountandDate(30L, startDate, endDate));
+    double cogsCr=creditCalculator(cRepository.findbySubAccountandDate(24L, startDate, endDate));
     double cogs=cogsDr-cogsCr;
-    double sgac=drCalculator(dRepository.findSgs(5L, startDate, endDate));
-    double depriciation=sumCalculator(cRepository.findbySubAccountandDate(30L, startDate, endDate));
+    double sgac=debitCalculator(dRepository.findSgs(5L, startDate, endDate));
+    double depriciation=creditCalculator(cRepository.findbySubAccountandDate(30L, startDate, endDate));
     double ebit=totalRevenue-cogs-sgac-depriciation;
-    double interestDr=drCalculator(dRepository.findbySubAccountandDate(31L, startDate, endDate));
-    double interestCr=sumCalculator(cRepository.findbySubAccountandDate(31L, startDate, endDate));
+    double interestDr=debitCalculator(dRepository.findbySubAccountandDate(31L, startDate, endDate));
+    double interestCr=creditCalculator(cRepository.findbySubAccountandDate(31L, startDate, endDate));
     double interestExpense=interestDr-interestCr;
     double preTax=ebit-interestExpense;
     double taxes=0.2*preTax;
-    double netIncome=preTax-taxes;
+    double netIncome=preTax-checkTax(taxes);
     Map<String,Double>incomeMap=new HashMap<>();
         incomeMap.put("revenue",totalRevenue);
         incomeMap.put("COGS",cogs);
@@ -59,7 +59,7 @@ public Map<String,Double>incomeStatement(Instant startDate,Instant endDate){
 
 
 
-private double sumCalculator(List<CreditTransaction>cList){
+private double creditCalculator(List<CreditTransaction>cList){
     double amount=0.0; 
     for (CreditTransaction creditTransaction : cList) {
        double tmp=creditTransaction.getAmount();
@@ -67,7 +67,7 @@ private double sumCalculator(List<CreditTransaction>cList){
         }
         return amount;
 }
-private double drCalculator(List<DebitTransaction>dList){
+private double debitCalculator(List<DebitTransaction>dList){
     double amount=0.0; 
     for (DebitTransaction debitTransaction : dList) {
        double tmp=debitTransaction.getAmount();
