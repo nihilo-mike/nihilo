@@ -33,9 +33,9 @@ public class CreditTransactionController {
         return creditTransactionRepository.findAll();
         
 }
-@GetMapping("/BalanceSheet")
-      Map<String,Double>getBalanceSheet(){
-        return balanceSheet.asset();
+@GetMapping("/BalanceSheet/{startDate}/{endDate}")
+      Map<String,Double>getBalanceSheet(@PathVariable Instant startDate,@PathVariable Instant endDate){
+        return balanceSheet.balanceSheet(startDate, endDate);
         }
 
 @GetMapping("/CreditTransaction/{creditTransId}")

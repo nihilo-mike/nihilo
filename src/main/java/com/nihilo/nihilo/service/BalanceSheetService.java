@@ -1,11 +1,12 @@
 package com.nihilo.nihilo.service;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.nihilo.nihilo.model.CreditTransaction;
-
+import com.nihilo.nihilo.model.DebitTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
 import com.nihilo.nihilo.repository.DebitTransactionRepository;
 
@@ -24,42 +25,85 @@ CreditTransactionRepository cRepository;
 @Autowired
 DebitTransactionRepository dRepository;
 
-
- public Map<String,Double> asset() {
+public Map<String,Double> balanceSheet(Instant startDate,Instant endDate) {
  
-    List<CreditTransaction>cashList=cRepository.findBySubAccountType_SubId(1L);
-   // List<CreditTransaction>cashEquivalentsList=cRepository.findBySubAccountType_SubId(2L);
-   // List<CreditTransaction>accountReceivablesList=cRepository.findAllBySubAccountType_SubId(3L);
-   // List<CreditTransaction>stockInventoryList=cRepository.findAllBySubAccountType_SubId(4L);
-   // List<CreditTransaction>prepaidLiabilitiesList=cRepository.findAllBySubAccountType_SubId(5L);
-   // List<CreditTransaction>intellectualPropertiesList=cRepository.findAllBySubAccountType_SubId(6L);
-   // List<CreditTransaction>plantEquipmentList=cRepository.findAllBySubAccountType_SubId(7L);
-  HashMap<String,Double>assetMap=new HashMap<>();
-    assetMap.put("cash", sumCalculator(cashList));
-  //  assetMap.put("cashEquivalents",sumCalculator(cashEquivalentsList));
-   // assetMap.put( "accountReceivables",sumCalculator(accountReceivablesList));
-   // assetMap.put("stockInventory",sumCalculator(stockInventoryList));
-   // assetMap.put("prepaidLiabilites",sumCalculator(prepaidLiabilitiesList));
-   // assetMap.put("intellectualProperties",sumCalculator(intellectualPropertiesList));
-   // assetMap.put("plantEquipment",sumCalculator(plantEquipmentList)); 
-  return assetMap;
+  final double cash=drCalculator(dRepository.findbySubAccountandDate(1L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(1L, startDate, endDate));
+  final double cashEquivalents=drCalculator(dRepository.findbySubAccountandDate(2L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(2L, startDate, endDate));
+  final double accountReceivables=drCalculator(dRepository.findbySubAccountandDate(3L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(3L, startDate, endDate));
+  final double stockInventory=drCalculator(dRepository.findbySubAccountandDate(4L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(4L, startDate, endDate));
+  final double prepaidLiabilities=drCalculator(dRepository.findbySubAccountandDate(5L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(5L, startDate, endDate));
+  final double intellectualProperties=drCalculator(dRepository.findbySubAccountandDate(6L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(6L, startDate, endDate));
+  final double plantEquipment=drCalculator(dRepository.findbySubAccountandDate(7L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(7L, startDate, endDate));
+  final double accountsPayable=drCalculator(dRepository.findbySubAccountandDate(13L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(13L, startDate, endDate));
+  final double taxesPayable=drCalculator(dRepository.findbySubAccountandDate(14L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(14L, startDate, endDate));
+  final double interestPayable=drCalculator(dRepository.findbySubAccountandDate(15L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(15L, startDate, endDate));
+  final double notesPayable=drCalculator(dRepository.findbySubAccountandDate(16L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(16L, startDate, endDate));
+  final double accruedExpense=drCalculator(dRepository.findbySubAccountandDate(17L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(17L, startDate, endDate));
+  final double unearnedRevenue=drCalculator(dRepository.findbySubAccountandDate(18L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(18L, startDate, endDate));
+  final double mortgagePayable=drCalculator(dRepository.findbySubAccountandDate(19L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(19L, startDate, endDate));
+  final double longTermDebt=drCalculator(dRepository.findbySubAccountandDate(20L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(20L, startDate, endDate));
+  final double ownersEquity=drCalculator(dRepository.findbySubAccountandDate(21L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(21L, startDate, endDate));
+  final double commonStocks=drCalculator(dRepository.findbySubAccountandDate(22L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(22L, startDate, endDate));
+  final double retainedEarnings=drCalculator(dRepository.findbySubAccountandDate(23L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(23L, startDate, endDate));
+  final double ownersDrawing=drCalculator(dRepository.findbySubAccountandDate(44L, startDate, endDate))-crCalculator(
+    cRepository.findbySubAccountandDate(44L, startDate, endDate));  
+  HashMap<String,Double>balance=new HashMap<>();
+    balance.put("cash", cash);
+    balance.put("cashEquivalent",cashEquivalents);
+    balance.put("accountReceivables",accountReceivables);
+    balance.put("stockInventory",stockInventory);
+    balance.put("prepaidLiabilities",prepaidLiabilities);
+    balance.put("intellectualProperties",intellectualProperties);
+    balance.put("plantEquipment",plantEquipment);
+    balance.put("accountsPayable",accountsPayable);
+    balance.put( "taxesPayable",taxesPayable);
+    balance.put( "interestPayable",interestPayable);
+    balance.put( "notesPayable",notesPayable);
+    balance.put( "accruedExpense",accruedExpense);
+    balance.put( "unearnedRevenue",unearnedRevenue);
+    balance.put( "mortgagePayable",mortgagePayable);
+    balance.put("longTermDebt" ,longTermDebt);
+    balance.put("ownersEquity" ,ownersEquity);
+    balance.put( "commonStocks",commonStocks);
+    balance.put( "retainedEarnings",retainedEarnings);
+    balance.put( "ownersDrawing",ownersDrawing);
+    return balance;
 }
 
-
-
-//dr-cr
-//date important 
-//
-
-private double sumCalculator(List<CreditTransaction>cList){
-    double amount=0.0; 
+private double crCalculator(List<CreditTransaction>cList){
+double amount=0.0; 
     for (CreditTransaction creditTransaction : cList) {
        double tmp=creditTransaction.getAmount();
        amount+=tmp;
         }
         return amount;
 }
-
+private double drCalculator(List<DebitTransaction>dList){
+    double amount=0.0; 
+    for (DebitTransaction debitTransaction : dList) {
+       double tmp=debitTransaction.getAmount();
+       amount+=tmp;
+        }
+        return amount;
+}
 
 
 

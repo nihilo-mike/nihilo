@@ -16,14 +16,13 @@ import java.util.Optional;
 public class AccountTypeController {
 private final AccountTypeRepository accountTypeRepository;
 
-
-    public AccountTypeController(AccountTypeRepository accountTypeRepository) {
+public AccountTypeController(AccountTypeRepository accountTypeRepository) {
         this.accountTypeRepository = accountTypeRepository;
     }
-
+//this is the jpa equivalent of select all
 @GetMapping("/AccountType")
     Collection<AccountType> accountType() {
-        return accountTypeRepository.findAll();//this is the jpa equivalent of select all
+        return accountTypeRepository.findAll();
     }
 @GetMapping("/AccountType/{accTypeId}")
     ResponseEntity<?> getAccountType(@PathVariable Long accTypeId){
