@@ -26,7 +26,7 @@ CreditTransactionRepository cRepository;
 DebitTransactionRepository dRepository;
 
 public Map<String,Double> balanceSheet(Instant startDate,Instant endDate) {
- 
+ //im getting the data from the database by subid which is a Long and date then opertating on it 
   final double cash=drCalculator(dRepository.findbySubAccountandDate(1L, startDate, endDate))-crCalculator(
     cRepository.findbySubAccountandDate(1L, startDate, endDate));
   final double cashEquivalents=drCalculator(dRepository.findbySubAccountandDate(2L, startDate, endDate))-crCalculator(
