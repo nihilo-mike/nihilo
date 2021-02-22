@@ -44,16 +44,16 @@ public Map<String,Double>incomeStatement(Instant startDate,Instant endDate){
     double netIncome=preTax-checkTax(taxes);
     Map<String,Double>incomeMap=new HashMap<>();
         incomeMap.put("revenue",totalRevenue);
-        incomeMap.put("COGS",cogs);
-        incomeMap.put("SGAC",sgac);
-        incomeMap.put("Depreciation",depriciation);
-        incomeMap.put("Ebit",ebit);
-        incomeMap.put("InterestExpense",interestExpense);
-        incomeMap.put("PretaxIncome",ebit-interestExpense);
-        incomeMap.put("Taxes",checkTax(taxes));
+        incomeMap.put("cogs",cogs);
+        incomeMap.put("sgac",sgac);
+        incomeMap.put("depreciation",depriciation);
+        incomeMap.put("ebit",ebit);
+        incomeMap.put("interestExpense",interestExpense);
+        incomeMap.put("preTaxIncome",ebit-interestExpense);
+        incomeMap.put("taxes",checkTax(taxes));
         incomeMap.put("netIncome",netIncome);
-        incomeMap.put("Addition to earnings",0.0);
-        incomeMap.put("Divivends",0.0);
+        incomeMap.put("additionToEarnings",0.0);
+        incomeMap.put("dividends",0.0);
   return incomeMap;
 }
 
