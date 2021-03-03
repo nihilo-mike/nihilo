@@ -33,13 +33,12 @@ public class AnalysisService {
    Double cogs=incomeService.incomeStatement(startDate, endDate).get("cogs");
    Double inventory=balanceService.balanceSheet(startDate, endDate).get("stockInventory");
    Double totalAssests=balanceService.balanceSheet(startDate, endDate).get("totalAssets");
-   Double totalLiabilities=balanceService.balanceSheet(startDate, endDate).get("totalLiabilities");
    Double totalEquity=balanceService.balanceSheet(startDate, endDate).get("totalEquity");
    Double ebit=incomeService.incomeStatement(startDate, endDate).get("ebit");
    Double interest=incomeService.incomeStatement(startDate, endDate).get("interestExpense");
    Double sales=incomeService.incomeStatement(startDate, endDate).get("revenue");
    Double netIncome=incomeService.incomeStatement(startDate, endDate).get("netIncome");
-   Double accountrecievables=balanceService.balanceSheet(startDate, endDate).get("accountReceivables")
+   Double accountrecievables=balanceService.balanceSheet(startDate, endDate).get("accountReceivables");
   
   
    HashMap<String,Double>analysis=new HashMap<>();
