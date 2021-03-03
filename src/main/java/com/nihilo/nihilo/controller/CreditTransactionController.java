@@ -2,6 +2,7 @@ package com.nihilo.nihilo.controller;
 
 import com.nihilo.nihilo.model.CreditTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
+import com.nihilo.nihilo.service.AnalysisService;
 import com.nihilo.nihilo.service.BalanceSheetService;
 import com.nihilo.nihilo.service.IncomeStatement;
 
@@ -25,6 +26,9 @@ public class CreditTransactionController {
    @Autowired
     private BalanceSheetService balanceSheet;
 
+    @Autowired
+    private AnalysisService analysis;
+
   @Autowired
    private IncomeStatement incomeStatement;
 
@@ -37,6 +41,11 @@ public class CreditTransactionController {
       Map<String,Double>getBalanceSheet(@PathVariable Instant startDate,@PathVariable Instant endDate){
         return balanceSheet.balanceSheet(startDate, endDate);
         }
+
+@GetMapping("/Analysis/{startDate}/{endDate}")
+      Map<String,Double>getAnalysis(@PathVariable Instant startDate,@PathVariable Instant endDate){
+        return analysis.getAnalysis(startDate, endDate);
+          }        
 
 @GetMapping("/CreditTransaction/{creditTransId}")
     ResponseEntity<?>getCreditTransaction(@PathVariable Long creditTransId){
