@@ -1,51 +1,39 @@
 package com.nihilo.nihilo.controller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
 import com.nihilo.nihilo.model.CreditTransaction;
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
-import com.nihilo.nihilo.service.AnalysisService;
-import com.nihilo.nihilo.service.BalanceSheetService;
-import com.nihilo.nihilo.service.IncomeStatement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.Instant;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+
 @CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class CreditTransactionController {
     @Autowired
     private CreditTransactionRepository creditTransactionRepository;
-   @Autowired
-    private BalanceSheetService balanceSheet;
-
-    @Autowired
-    private AnalysisService analysis;
-
-  @Autowired
-   private IncomeStatement incomeStatement;
-
+   
 @GetMapping("/CreditTransaction")
       List<CreditTransaction> creditTransactions(){
         return creditTransactionRepository.findAll();
-        
-}
-@GetMapping("/BalanceSheet/{startDate}/{endDate}")
-      Map<String,Double>getBalanceSheet(@PathVariable Instant startDate,@PathVariable Instant endDate){
-        return balanceSheet.balanceSheet(startDate, endDate);
         }
-
-@GetMapping("/Analysis/{startDate}/{endDate}")
-      Map<String,Double>getAnalysis(@PathVariable Instant startDate,@PathVariable Instant endDate){
-        return analysis.getAnalysis(startDate, endDate);
-          }        
 
 @GetMapping("/CreditTransaction/{creditTransId}")
     ResponseEntity<?>getCreditTransaction(@PathVariable Long creditTransId){
@@ -54,10 +42,6 @@ public class CreditTransactionController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-@GetMapping("/IncomeStatement/{startDate}/{endDate}")
-    Map<String,Double>getIncomeStatement(@PathVariable Instant startDate,@PathVariable Instant endDate){
-    return incomeStatement.incomeStatement(startDate, endDate);
-}
 @PostMapping("/CreditTransaction")
     ResponseEntity<CreditTransaction>createCreditTransaction(@RequestBody CreditTransaction creditTransaction)
     throws URISyntaxException {

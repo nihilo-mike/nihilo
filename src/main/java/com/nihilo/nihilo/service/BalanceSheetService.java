@@ -85,6 +85,16 @@ public Map<String,Double> balanceSheet(Instant startDate,Instant endDate) {
     balance.put( "commonStocks",commonStocks);
     balance.put( "retainedEarnings",retainedEarnings);
     balance.put( "ownersDrawing",ownersDrawing);
+    balance.put("totalAssets",cash+cashEquivalents+accountReceivables+
+    stockInventory+prepaidLiabilities+
+    intellectualProperties+plantEquipment);
+    balance.put("totalLiabilities",accountsPayable+taxesPayable+
+    interestPayable+notesPayable+accruedExpense+
+    unearnedRevenue+mortgagePayable+longTermDebt);
+    balance.put("totalEquity",ownersEquity+commonStocks+retainedEarnings+
+    ownersDrawing);
+    
+    
     return balance;
 }
 
