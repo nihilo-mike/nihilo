@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SubAccountTypeController {
 
-    private SubAccountTypeRepository subAccountTypeRepository;
+    private final SubAccountTypeRepository subAccountTypeRepository;
     public SubAccountTypeController(SubAccountTypeRepository subAccountTypeRepository) {
         this.subAccountTypeRepository=subAccountTypeRepository;
     }

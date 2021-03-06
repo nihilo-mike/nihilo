@@ -1,17 +1,17 @@
 package com.nihilo.nihilo.controller;
 
+import com.nihilo.nihilo.config.JwtToken;
 import com.nihilo.nihilo.model.JwtRequest;
 import com.nihilo.nihilo.model.JwtResponse;
 import com.nihilo.nihilo.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import com.nihilo.nihilo.config.JwtToken;
-import org.springframework.security.authentication.AuthenticationManager;
 
 @RestController
 @CrossOrigin
