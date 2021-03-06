@@ -5,9 +5,11 @@ import java.util.Optional;
 import java.net.URI;
 import java.net.URISyntaxException;
 import com.nihilo.nihilo.repository.TransactionRepository;
+import com.nihilo.nihilo.service.TransactionService;
 import com.nihilo.nihilo.model.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
 @CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -24,10 +29,23 @@ public class TransactionsController {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private TransactionService service;
+    
+
+
     @GetMapping("/Transaction")
-    List<Transactions>Transactions(){
-        return transactionRepository.findAll();
-    }
+    public ResponseEntity<List<Transactions>> getAllTransactions(
+        @RequestParam(defaultValue = "0") Integer pageNo, 
+        @RequestParam(defaultValue = "5") Integer pageSize) 
+        {
+   List<Transactions> list = service.getAllTransactions(pageNo, pageSize);
+
+  return new ResponseEntity<List<Transactions>>(list, new HttpHeaders(), HttpStatus.OK); 
+                 }
+    
+
+
     @GetMapping("/Transaction/{transId}")
       ResponseEntity<?>getTransaction(@PathVariable Long transId){
       Optional<Transactions>transaction=transactionRepository.findById(transId);

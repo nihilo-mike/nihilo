@@ -2,11 +2,13 @@ package com.nihilo.nihilo.repository;
 import java.util.List;
 
 import com.nihilo.nihilo.model.Transactions;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TransactionRepository extends JpaRepository<Transactions,Long> {
-  List<Transactions>findByTransId(Long transId);
-  List<Transactions>findAll();   
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface TransactionRepository extends PagingAndSortingRepository<Transactions,Long> {
+  List<Transactions>findByTransId(Long transId,Pageable pageable);
+  List<Transactions>findAll(Pageable pageable);   
 
 
 
