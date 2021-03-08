@@ -19,16 +19,18 @@ public class TransactionService
     @Autowired
     TransactionRepository repository;
      
-    public List<Transactions> getAllTransactions(Integer pageNo, Integer pageSize)
+    public Page<Transactions> getAllTransactions(Integer pageNo, Integer pageSize)
       {
         Pageable paging = PageRequest.of(pageNo, pageSize);
  
         Page<Transactions> pagedResult = repository.findAll(paging);
+
+        
          
         if(pagedResult.hasContent()) {
-            return pagedResult.getContent();
+            return pagedResult;
         } else {
-            return new ArrayList<>();
+            return null;
         }
     }
 }
