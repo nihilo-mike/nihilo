@@ -8,6 +8,7 @@ import com.nihilo.nihilo.repository.TransactionRepository;
 import com.nihilo.nihilo.service.TransactionService;
 import com.nihilo.nihilo.model.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,13 +36,13 @@ public class TransactionsController {
 
 
     @GetMapping("/Transaction")
-    public ResponseEntity<List<Transactions>> getAllTransactions(
+    public ResponseEntity<Page<Transactions>> getAllTransactions(
         @RequestParam(defaultValue = "0") Integer pageNo, 
         @RequestParam(defaultValue = "5") Integer pageSize) 
         {
-   List<Transactions> list = service.getAllTransactions(pageNo, pageSize);
+   Page<Transactions> list = service.getAllTransactions(pageNo, pageSize);
 
-  return new ResponseEntity<List<Transactions>>(list, new HttpHeaders(), HttpStatus.OK); 
+  return new ResponseEntity<Page<Transactions>>(list, new HttpHeaders(), HttpStatus.OK); 
                  }
     
 
