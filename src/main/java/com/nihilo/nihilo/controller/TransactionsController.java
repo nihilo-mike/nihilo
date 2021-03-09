@@ -36,7 +36,7 @@ public class TransactionsController {
 
 
     @GetMapping("/Transaction")
-    public ResponseEntity<Page<Transactions>> getAllTransactions(
+    public ResponseEntity<?> getAllTransactions(
         @RequestParam(defaultValue = "0") Integer pageNo, 
         @RequestParam(defaultValue = "5") Integer pageSize) 
         {
