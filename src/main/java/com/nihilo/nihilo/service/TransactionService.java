@@ -22,10 +22,11 @@ public class TransactionService
     public List<Page<Transactions>> getAllTransactions(Integer pageNo, Integer pageSize)
       {
         Pageable paging = PageRequest.of(pageNo, pageSize);
- 
         Page<Transactions> pagedResult = repository.findAll(paging);
     if(pagedResult.hasContent()) {
-        return List.of(pagedResult);
+        List<Page<Transactions>> result=new ArrayList<>();
+        result.add(pagedResult); 
+        return result;
         } else {
             return new ArrayList<>();
         }
