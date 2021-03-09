@@ -36,14 +36,12 @@ public class TransactionsController {
 
 
     @GetMapping("/Transaction")
-    public ResponseEntity<?> getAllTransactions(
+    public List<?> getAllTransactions(
         @RequestParam(defaultValue = "0") Integer pageNo, 
         @RequestParam(defaultValue = "5") Integer pageSize) 
-        {
-   Page<Transactions> list = service.getAllTransactions(pageNo, pageSize);
-
-  return new ResponseEntity<Page<Transactions>>(list, new HttpHeaders(), HttpStatus.OK); 
-                 }
+          {
+         return  service.getAllTransactions(pageNo, pageSize); 
+          }
     
 
 
