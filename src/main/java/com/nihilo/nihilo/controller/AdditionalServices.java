@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class AdditionalServices {
-    
-   @Autowired
+
+    @Autowired
     private BalanceSheetService balanceSheet;
 
     @Autowired
     private AnalysisService analysis;
 
-  @Autowired
+   @Autowired
    private IncomeStatement incomeStatement;
-
+  
 @GetMapping("/BalanceSheet/{startDate}/{endDate}")
     Map<String,Double>getBalanceSheet(@PathVariable Instant startDate,@PathVariable Instant endDate){
         return balanceSheet.balanceSheet(startDate, endDate);
@@ -42,6 +42,14 @@ public class AdditionalServices {
     Map<String,Double>getIncomeStatement(@PathVariable Instant startDate,@PathVariable Instant endDate){
     return incomeStatement.incomeStatement(startDate, endDate);
 }
+
+@GetMapping("/Revenue")
+  Map<String,Double>getRevenue(){
+    return analysis.getTotalRevenue();
+      }
+    
+
+
 
 
 }

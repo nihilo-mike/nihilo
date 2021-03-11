@@ -28,6 +28,10 @@ public class AnalysisService {
     @Autowired
     IncomeStatement incomeService;
 
+  Instant endYear = Instant.parse("2022-12-31T00:00:00.000Z");
+  Instant startYear = Instant.parse("2021-01-01T00:00:00.000Z");
+
+
   public Map<String,Double>getAnalysis(Instant startDate,Instant endDate){
 
    Double cogs=incomeService.incomeStatement(startDate, endDate).get("cogs");
@@ -41,22 +45,26 @@ public class AnalysisService {
    Double accountrecievables=balanceService.balanceSheet(startDate, endDate).get("accountReceivables");
   
   
-   HashMap<String,Double>analysis=new HashMap<>();
-  analysis.put("debtRatio",(totalAssests-totalEquity)/totalAssests);
-  analysis.put("Equitymultiplier",totalAssests/totalEquity);
-  analysis.put("timesInterest",ebit/interest);
-  analysis.put("inventoryTurnOver", cogs/inventory);
-  analysis.put("recievablesTurnOver",sales/accountrecievables);
-  analysis.put("totalAssetTurnOver",sales/totalAssests);
-  analysis.put("capitalIntensity",totalAssests/sales);
-  analysis.put("profitMargin",netIncome/sales);
-  analysis.put("roa",netIncome/totalAssests);
-  analysis.put("roe",netIncome/totalEquity);
+    HashMap<String,Double>analysis=new HashMap<>();
+    analysis.put("debtRatio",(totalAssests-totalEquity)/totalAssests);
+    analysis.put("Equitymultiplier",totalAssests/totalEquity);
+    analysis.put("timesInterest",ebit/interest);
+    analysis.put("inventoryTurnOver", cogs/inventory);
+    analysis.put("recievablesTurnOver",sales/accountrecievables);
+    analysis.put("totalAssetTurnOver",sales/totalAssests);
+    analysis.put("capitalIntensity",totalAssests/sales);
+    analysis.put("profitMargin",netIncome/sales);
+    analysis.put("roa",netIncome/totalAssests);
+    analysis.put("roe",netIncome/totalEquity);
+    return analysis;
+   } 
 
+public Map<String,Double>getTotalRevenue(){
+  Double totalRevenue=incomeService.incomeStatement(startYear, endYear).get("revenue");
+  HashMap<String,Double>revenue=new HashMap<>();
+  revenue.put("revenue",totalRevenue);
+  return revenue;
+   }
    
-  return analysis;
- } 
 
-
-    
 }
