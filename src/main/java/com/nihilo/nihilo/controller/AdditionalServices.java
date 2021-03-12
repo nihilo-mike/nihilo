@@ -47,8 +47,18 @@ public class AdditionalServices {
   Map<String,Double>getRevenue(){
     return analysis.getTotalRevenue();
       }
-    
 
+
+@GetMapping("/Roa")
+  Map<String,Double>roa(){
+    return analysis.getRoa();
+        }    
+
+
+@GetMapping("/ProfitMargin")
+  Map<String,Double>getMargins(){
+    return analysis.getProfitMargin();
+        }        
 
 
 
