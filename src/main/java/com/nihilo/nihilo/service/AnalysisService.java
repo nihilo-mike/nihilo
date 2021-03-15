@@ -2,7 +2,9 @@ package com.nihilo.nihilo.service;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import com.nihilo.nihilo.repository.CreditTransactionRepository;
 import com.nihilo.nihilo.repository.DebitTransactionRepository;
@@ -79,7 +81,7 @@ public Map<String,Double>getTotalRevenue(){
   return revenue;
    }
 
-   public Map<String,Double>getProfitMargin(){
+   public List<Double>getProfitMargin(){
     Double janProfitMargin=getAnalysis(startYear,second).get(profitMargin);
     Double febProfitMargin=getAnalysis(second,third).get(profitMargin);
     Double marProfitMargin=getAnalysis(third,fourth).get(profitMargin);
@@ -92,23 +94,23 @@ public Map<String,Double>getTotalRevenue(){
     Double octProfitMargin=getAnalysis(tenth,eleventh).get(profitMargin);
     Double novProfitMargin=getAnalysis(eleventh,twelfth).get(profitMargin);
     Double decProfitMargin=getAnalysis(twelfth,endYear).get(profitMargin);
-    HashMap<String,Double>profitMar=new HashMap<>();
-    profitMar.put("january",janProfitMargin);
-    profitMar.put("february",febProfitMargin);
-    profitMar.put("march",marProfitMargin);
-    profitMar.put("april",aprProfitMargin);
-    profitMar.put("may",mayProfitMargin);
-    profitMar.put("june",junProfitMargin);
-    profitMar.put("july",julProfitMargin);
-    profitMar.put("august",augProfitMargin);
-    profitMar.put("september",sepProfitMargin);
-    profitMar.put("october",octProfitMargin);
-    profitMar.put("november",novProfitMargin);
-    profitMar.put("december",decProfitMargin);
+    ArrayList<Double>profitMar=new ArrayList<>();
+    profitMar.add(janProfitMargin);
+    profitMar.add(febProfitMargin);
+    profitMar.add(marProfitMargin);
+    profitMar.add(aprProfitMargin);
+    profitMar.add(mayProfitMargin);
+    profitMar.add(junProfitMargin);
+    profitMar.add(julProfitMargin);
+    profitMar.add(augProfitMargin);
+    profitMar.add(sepProfitMargin);
+    profitMar.add(octProfitMargin);
+    profitMar.add(novProfitMargin);
+    profitMar.add(decProfitMargin);
     return profitMar;
      }
 
-     public Map<String,Double>getRoa(){
+     public List<Double>getRoa(){
       Double janRoa=getAnalysis(startYear,second).get(roa);
       Double febRoa=getAnalysis(second,third).get(roa);
       Double marRoa=getAnalysis(third,fourth).get(roa);
@@ -121,19 +123,19 @@ public Map<String,Double>getTotalRevenue(){
       Double octRoa=getAnalysis(tenth,eleventh).get(roa);
       Double novRoa=getAnalysis(eleventh,twelfth).get(roa);
       Double decRoa=getAnalysis(twelfth,endYear).get(roa);
-      HashMap<String,Double>Roa=new HashMap<>();
-      Roa.put("january",janRoa);
-      Roa.put("february",febRoa);
-      Roa.put("march",marRoa);
-      Roa.put("april",aprRoa);
-      Roa.put("may",mayRoa);
-      Roa.put("june",junRoa);
-      Roa.put("july",julRoa);
-      Roa.put("august",augRoa);
-      Roa.put("september",sepRoa);
-      Roa.put("october",octRoa);
-      Roa.put("november",novRoa);
-      Roa.put("december",decRoa);
+      ArrayList<Double>Roa=new ArrayList<>();
+      Roa.add(janRoa);
+      Roa.add(febRoa);
+      Roa.add(marRoa);
+      Roa.add(aprRoa);
+      Roa.add(mayRoa);
+      Roa.add(junRoa);
+      Roa.add(julRoa);
+      Roa.add(augRoa);
+      Roa.add(sepRoa);
+      Roa.add(octRoa);
+      Roa.add(novRoa);
+      Roa.add(decRoa);
       return Roa;
        }  
   

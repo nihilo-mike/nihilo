@@ -1,6 +1,7 @@
 package com.nihilo.nihilo.controller;
  
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 
 import com.nihilo.nihilo.service.AnalysisService;
@@ -50,13 +51,13 @@ public class AdditionalServices {
 
 
 @GetMapping("/Roa")
-  Map<String,Double>roa(){
+  List<Double>roa(){
     return analysis.getRoa();
         }    
 
 
 @GetMapping("/ProfitMargin")
-  Map<String,Double>getMargins(){
+  List<Double>getMargins(){
     return analysis.getProfitMargin();
         }        
 
