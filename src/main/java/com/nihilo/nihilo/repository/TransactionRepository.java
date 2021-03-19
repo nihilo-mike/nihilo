@@ -13,7 +13,7 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
   
 
 @Query(value = "select t from Transactions t JOIN t.creditTransactions c where c.remark LIKE CONCAT('%',UPPER(:remark),'%')"+
-"OR t join t.debittransactions d where d.remark LIKE CONCAT('%',UPPER(:remark),'%') ")
+"OR t join t.debitTransactions d where d.remark LIKE CONCAT('%',UPPER(:remark),'%') ")
 Optional<Transactions>searchByRemark(@Param("remark") String remark);
 
 
