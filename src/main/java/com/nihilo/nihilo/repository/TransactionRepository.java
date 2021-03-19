@@ -12,8 +12,8 @@ import org.springframework.data.repository.query.Param;
 public interface TransactionRepository extends PagingAndSortingRepository<Transactions,Long> {
   
 
-@Query(value = "select t from Transactions t JOIN t.creditTransactions c where c.remark LIKE CONCAT('%',UPPER(:remark),'%')"+
-"OR t join t.debitTransactions d where d.remark LIKE CONCAT('%',UPPER(:remark),'%') ")
+@Query(value = "select t from Transactions t LEFT JOIN FETCH t.creditTransactions c where c.remark LIKE CONCAT('%',UPPER(:remark),'%')"+
+"OR t LEFT JOIN FETCH t.debitTransactions d where d.remark LIKE CONCAT('%',UPPER(:remark),'%') ")
 Optional<Transactions>searchByRemark(@Param("remark") String remark);
 
 
