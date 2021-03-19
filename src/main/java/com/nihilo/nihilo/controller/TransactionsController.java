@@ -42,7 +42,17 @@ public class TransactionsController {
           {
          return  service.getAllTransactions(pageNo, pageSize); 
           }
+    @GetMapping("/Transaction/{remark}")
+      ResponseEntity<?>searchRemark(@PathVariable String remark){
+        Optional<Transactions>transaction=transactionRepository.searchByRemark(remark);
+            return transaction.map(response->ResponseEntity.ok().body(response))
+                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+           }
     
+
+
+
+
 
 
     @GetMapping("/Transaction/{transId}")
