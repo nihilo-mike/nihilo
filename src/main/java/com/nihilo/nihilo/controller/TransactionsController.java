@@ -44,7 +44,7 @@ public class TransactionsController {
           }
     @GetMapping("/Transaction/{remark}")
       ResponseEntity<?>searchRemark(@PathVariable String remark){
-        Optional<Transactions>transaction=transactionRepository.findByCreditTransactions_RemarkOrDebitTransactions_Remark(remark);
+        Optional<Transactions>transaction=transactionRepository.findByCreditTransactions_RemarkOrDebitTransactions_Remark(remark,remark);
             return transaction.map(response->ResponseEntity.ok().body(response))
                     .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
            }
