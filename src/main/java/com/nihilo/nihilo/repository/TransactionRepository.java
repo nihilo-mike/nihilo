@@ -10,8 +10,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface TransactionRepository extends PagingAndSortingRepository<Transactions,Long> {
   
 
-Optional<Transactions>findByCreditTransactions_RemarkOrDebitTransactions_Remark(String remark,String remark);
-
 
 
 }
